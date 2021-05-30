@@ -1,7 +1,10 @@
 import random
 
+startingMoney = 10
+highscore = startingMoney
+money = startingMoney
+print("Welcome to Dice Betting! Play as long as you have money!")
 
-money = 10
 
 #plays as long as you have money
 while money > 0:
@@ -23,7 +26,12 @@ while money > 0:
 
     guess = int(input("guess: "))
 
+    # high score calculation
+    if money > highscore:
+        highscore = money
 
+
+    # win/lose calculation
     if (guess == dice):
         winnings = deposit*2
         money += winnings
@@ -35,3 +43,4 @@ while money > 0:
         print("You lost:", deposit)
 
 print("You lose :(")
+print("Your highest money was:", highscore)
