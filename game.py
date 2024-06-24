@@ -1,30 +1,43 @@
 import random
 
-startingMoney = 10
+startingMoney = 100
 highscore = startingMoney
 money = startingMoney
-print("Welcome to Dice Betting! Play as long as you have money!")
+print("\nWelcome to Dice Betting! Play as long as you have money!\n")
+
 
 
 #plays as long as you have money
 while money > 0:
     dice = random.randint(1, 6)
     # print("dice: ", dice)
-    print("money:", money)
-    deposit = int(input("deposit: "))
-
-    #checks for negaitve
-    if (deposit < 0):
-        while deposit < 0:
-            print("Negative money doesn't exist! You have:", money)
+    print("\nmoney:", money)
+    deposit = 0
+    
+    # validate deposit
+    while (deposit <= 0):
+        try:
             deposit = int(input("deposit: "))
-    #checks for wrong money
-    if (deposit > money):
-        while deposit > money:
-            print("Insufficient funds! You have:", money)
-            deposit = int(input("deposit: "))
+            
+            #checks for overdraft
+            if (deposit > money):
+                    print("Insufficient funds! You have:", money, "to spend\n")
+                    deposit = 0
 
-    guess = int(input("guess: "))
+        except:
+            print("amount entered was not an integer bigger than 0")
+  
+    # validate guess
+    guess = 0
+    while (guess <= 0):
+        try:    
+            guess = int(input("guess: "))
+            if (guess < 1 or guess > 6):
+                print("Can only guess an integer between 1-6")
+                guess = 0
+        except:           
+                print("amount entered was not an integer bigger than 0")
+
 
     # high score calculation
     if money > highscore:
